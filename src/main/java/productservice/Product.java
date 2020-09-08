@@ -10,13 +10,15 @@ import javax.persistence.Id;
 @Entity
 class Product {
     private @Id @GeneratedValue Long id;
+    private String type;
     private String name;
-    private String role;
+    private String version;
 
     Product() {}
 
-    Product(String name, String role) {
+    Product(String type, String name, String version) {
+        this.type = type;
         this.name = name;
-        this.role = role;
+        this.version = version;
     }
 }
