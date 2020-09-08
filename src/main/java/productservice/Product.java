@@ -1,4 +1,4 @@
-package payroll;
+package productservice;
 
 import lombok.Data;
 
@@ -8,14 +8,14 @@ import javax.persistence.Id;
 
 @Data
 @Entity
-class Employee {
+class Product {
     private @Id @GeneratedValue Long id;
     private String name;
     private String role;
 
-    Employee() {}
+    Product() {}
 
-    Employee(String name, String role) {
+    Product(String name, String role) {
         this.name = name;
         this.role = role;
     }

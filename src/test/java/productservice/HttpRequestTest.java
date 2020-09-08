@@ -1,4 +1,4 @@
-package payroll;
+package productservice;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,16 +20,16 @@ public class HttpRequestTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void getEmployeesList() throws Exception {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/employees",
+    public void getProductsList() throws Exception {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/products",
                 String.class)).contains(
                         "[{\"id\":1,\"name\":\"Bilbo Baggins\",\"role\":\"burglar\"},{\"id\":2,\"name\":\"Frodo Baggins\",\"role\":\"thief\"}]"
         );
     }
 
     @Test
-    public void getEmployee() throws Exception {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/employees/1",
+    public void getProduct() throws Exception {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/products/1",
                 String.class)).contains("{\"id\":1,\"name\":\"Bilbo Baggins\",\"role\":\"burglar\"}"
         );
     }

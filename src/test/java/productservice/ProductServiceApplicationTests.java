@@ -1,10 +1,10 @@
-package payroll;
+package productservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PayrollApplicationTests {
+class ProductServiceApplicationTests {
 
 	@Test
 	void contextLoads() {

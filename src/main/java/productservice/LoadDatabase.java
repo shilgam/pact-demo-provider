@@ -1,4 +1,4 @@
-package payroll;
+package productservice;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Configuration;
 class LoadDatabase {
 
     @Bean
-    CommandLineRunner initDatabase(EmployeeRepository repository) {
+    CommandLineRunner initDatabase(ProductRepository repository) {
         return args -> {
-            log.info("Preloading " + repository.save(new Employee("Bilbo Baggins", "burglar")));
-            log.info("Preloading " + repository.save(new Employee("Frodo Baggins", "thief")));
+            log.info("Preloading " + repository.save(new Product("Bilbo Baggins", "burglar")));
+            log.info("Preloading " + repository.save(new Product("Frodo Baggins", "thief")));
         };
     }
 }
