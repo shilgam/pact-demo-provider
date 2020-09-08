@@ -1,6 +1,8 @@
-# spring-test-tutorial
+# pact-demo-provider
 
-[![Build Status](https://travis-ci.com/shilgam/spring-rest-tutorial.svg?branch=master)](https://travis-ci.com/shilgam/spring-rest-tutorial)
+[![Build Status](https://travis-ci.com/shilgam/pact-demo-provider.svg?branch=master)](https://travis-ci.com/shilgam/pact-demo-provider)
+
+This is an example of a provider app (Java app) that uses Pact, [Pactflow](https://pactflow.io) and Travis CI to ensure that it is compatible with the expectations its consumers have of it.
 
 ## Prerequisites
 * Java 8
