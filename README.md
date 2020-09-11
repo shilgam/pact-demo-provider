@@ -17,15 +17,15 @@ This is an example of a provider app (Java app) that uses Pact, [Pactflow](https
 
 1. Use the application
 
-        $ curl -v localhost:8080/employees
+        $ curl -v localhost:8080/products
 
-        $ curl -v localhost:8080/employees/99
+        $ curl -v localhost:8080/products/1
 
-        $ curl -X POST localhost:8080/employees -H 'Content-type:application/json' -d '{"name": "Samwise Gamgee", "role": "gardener"}'
+        $ curl -X POST localhost:8080/products -H 'Content-type:application/json' -d '{"type":"CREDIT_CARD","name":"Gem Master","version":"v3"}'
 
-        $ curl -X PUT localhost:8080/employees/3 -H 'Content-type:application/json' -d '{"name": "Samwise Gamgee", "role": "ring bearer"}'
+        $ curl -X PUT localhost:8080/products/3 -H 'Content-type:application/json' -d '{"type":"DEBIT_CARD","name":"Gem Visa","version":"v1"}'
 
-        $ curl -X DELETE localhost:8080/employees/3
+        $ curl -X DELETE localhost:8080/products/3
 
 
 ### Run the test suite

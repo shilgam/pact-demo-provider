@@ -23,14 +23,15 @@ public class HttpRequestTest {
     public void getProductsList() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/products",
                 String.class)).contains(
-                        "[{\"id\":1,\"name\":\"Bilbo Baggins\",\"role\":\"burglar\"},{\"id\":2,\"name\":\"Frodo Baggins\",\"role\":\"thief\"}]"
+                        "[{\"id\":1,\"type\":\"CREDIT_CARD\",\"name\":\"Gem Visa\",\"version\":\"v1\"},{\"id\":2,\"type\":\"CREDIT_CARD\",\"name\":\"28 Degrees\",\"version\":\"v1\"},{\"id\":3,\"type\":\"PERSONAL_LOAN\",\"name\":\"MyFlexiPay\",\"version\":\"v2\"}]"
         );
     }
 
     @Test
     public void getProduct() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/products/1",
-                String.class)).contains("{\"id\":1,\"name\":\"Bilbo Baggins\",\"role\":\"burglar\"}"
+                String.class)).contains(
+                        "{\"id\":1,\"type\":\"CREDIT_CARD\",\"name\":\"Gem Visa\",\"version\":\"v1\"}"
         );
     }
 }
