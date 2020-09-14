@@ -63,6 +63,14 @@ task stopProvider(type: KillProcessTask) {
 
 }
 
+def getLastCommitHash() {
+    return ['sh', '-c', 'git rev-parse --short HEAD'].execute().text
+}
+
+def getCurrentBranchName() {
+    return ['sh', '-c', 'git rev-parse --abbrev-ref HEAD'].execute().text
+}
+
 pact {
   serviceProviders {
     'pact-demo-provider' {
@@ -71,8 +79,8 @@ pact {
       startProviderTask = startProvider
       terminateProviderTask = stopProvider
       // stateChangeUrl = url('http://localhost:8080/pactStateChange')
-      providerVersion = { project['provider.versionPrefix'] + System.getenv('TRAVIS_COMMIT') }
-      providerTag = { System.getenv('TRAVIS_BRANCH') }
+      providerVersion = { System.getenv('TRAVIS_COMMIT') ?: getLastCommitHash() }
+      providerTag = { System.getenv('TRAVIS_BRANCH') ?: getCurrentBranchName() }
 
       if (project.hasProperty('pactBrokerUrl')) {
         println('Getting pact file(s) from Pact Broker...')
@@ -86,7 +94,6 @@ pact {
     }
   }
 }
-
 
 test {
 	useJUnitPlatform()
