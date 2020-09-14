@@ -6,6 +6,7 @@ This is an example of a provider app (Java app) that uses Pact, [Pactflow](https
 
 ## Prerequisites
 * Java 8
+* Make sure that properties `pactBrokerUrl` and `pactBrokerToken` are specified in `gradle.properties` file
 
 ## Usage
 
@@ -30,6 +31,15 @@ This is an example of a provider app (Java app) that uses Pact, [Pactflow](https
 
 ### Run the test suite
 
-1. Run unit and integration tests:
+1. Run unit and integration tests
 
         $ ./gradlew test
+
+
+1. Verify provider app
+
+        $ ./gradlew pactVerify
+
+1. Verify provider app and publish results back to Pact Broker
+
+        $ /gradlew pactVerify -Ppact.verifier.publishResults=true
