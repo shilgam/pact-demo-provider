@@ -63,7 +63,7 @@ pact {
 
       startProviderTask = startProvider
       terminateProviderTask = stopProvider
-      // stateChangeUrl = url('http://localhost:8080/pactStateChange')
+      stateChangeUrl = url('http://localhost:8080/pactStateChange')
       providerVersion = { System.getenv('TRAVIS_COMMIT') ?: getLastCommitHash() }
       providerTag = { System.getenv('TRAVIS_BRANCH') ?: getCurrentBranchName() }
 
