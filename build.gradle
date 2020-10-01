@@ -1,4 +1,6 @@
 plugins {
+	id "au.com.dius.pact" version "4.1.2"
+	id "com.wiredforcode.spawn" version "0.8.2"
 	id 'org.springframework.boot' version '2.3.3.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
@@ -31,4 +33,62 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+springBoot {
+  mainClassName = 'productservice.ProductServiceApplication'
+}
+
+task startProvider(type: SpawnProcessTask, dependsOn: 'assemble') {
+  command "java -Dspring.profiles.active=test -jar ${jar.archivePath}"
+  ready 'Started ProductServiceApplication'
+}
+
+task stopProvider(type: KillProcessTask) {
+
+}
+
+def getLastCommitHash() {
+    return ['sh', '-c', 'git rev-parse --short HEAD'].execute().text
+}
+
+def getCurrentBranchName() {
+    return ['sh', '-c', 'git rev-parse --abbrev-ref HEAD'].execute().text
+}
+
+pact {
+  serviceProviders {
+    'pact-demo-provider' {
+      port = 8080
+
+      startProviderTask = startProvider
+      terminateProviderTask = stopProvider
+      stateChangeUrl = url('http://localhost:8080/pactStateChange')
+      providerVersion = { System.getenv('TRAVIS_COMMIT') ?: getLastCommitHash() }
+      providerTag = { System.getenv('TRAVIS_BRANCH') ?: getCurrentBranchName() }
+
+      if ((System.getenv('LOCAL_PACT_BROKER') == 'true')) {
+        println('Getting pact file(s) from Local Pact Broker...')
+
+        def pactBrokerUrl = project.localpactBrokerUrl
+        def pactBrokerUser = project.localpactBrokerUsername
+        def pactBrokerPassword = project.localpactBrokerPassword
+
+        hasPactsFromPactBroker(
+          pactBrokerUrl,
+          authentication: ['Basic', pactBrokerUser, pactBrokerPassword]
+        )
+      } else {
+        println('Getting pact file(s) from Remote Pact Broker...')
+
+        def pactBrokerUrl = project.pactBrokerUrl
+        def pactBrokerToken = (project.pactBrokerToken == '<YOUR TOKEN>') ? System.getenv('PACT_BROKER_TOKEN') : project.pactBrokerToken
+
+        hasPactsFromPactBroker(
+          pactBrokerUrl,
+          authentication: ['Bearer', pactBrokerToken]
+        )
+      }
+    }
+  }
 }

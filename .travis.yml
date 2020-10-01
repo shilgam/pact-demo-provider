@@ -7,6 +7,14 @@ jdk: oraclejdk8
 
 jobs:
   include:
-    - stage: "test"
+    - stage: "Test Provider"
+      name: "Unit"
       script: |
+        echo ">>> Run unit/integration tests of Provider app"
         ./gradlew test --info
+
+
+    - name: "Verify contract"
+      script: |
+        echo ">>> Verify the provider and publish results back to Pact Broker"
+        ./gradlew pactVerify -Ppact.verifier.publishResults=true

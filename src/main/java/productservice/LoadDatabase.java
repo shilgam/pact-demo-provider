@@ -12,9 +12,9 @@ class LoadDatabase {
     @Bean
     CommandLineRunner initDatabase(ProductRepository repository) {
         return args -> {
-            log.info("Preloading " + repository.save(new Product("CREDIT_CARD", "Gem Visa", "v1")));
-            log.info("Preloading " + repository.save(new Product("CREDIT_CARD", "28 Degrees", "v1")));
-            log.info("Preloading " + repository.save(new Product("PERSONAL_LOAN", "MyFlexiPay", "v2")));
+            log.info("Preloading " + repository.saveAndFlush(new Product("CREDIT_CARD", "Gem Visa", "v1")));
+            log.info("Preloading " + repository.saveAndFlush(new Product("CREDIT_CARD", "28 Degrees", "v1")));
+            log.info("Preloading " + repository.saveAndFlush(new Product("PERSONAL_LOAN", "MyFlexiPay", "v2")));
         };
     }
 }

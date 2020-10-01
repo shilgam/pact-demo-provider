@@ -6,6 +6,14 @@ This is an example of a provider app (Java app) that uses Pact, [Pactflow](https
 
 ## Prerequisites
 * Java 8
+* if you use [Pactflow](https://pactflow.io) as remote Pact Broker:
+    - Make sure env var `LOCAL_PACT_BROKER=true` is not specified.
+    - Make sure correct properties are specified in `gradle.properties` file: `pactBrokerUrl` and `pactBrokerToken`
+* if you use local Pact Broker:
+    - Make sure you [launched Pact Broker locally](https://github.com/shilgam/pact-demo-consumer/blob/master/README.md).
+    - Make sure env var `LOCAL_PACT_BROKER=true` is set
+    - Make sure correct properties are specified in `gradle.properties` file: `localpactBrokerUrl`, `localpactBrokerUsername`, `localpactBrokerPassword`.
+
 
 ## Usage
 
@@ -30,6 +38,15 @@ This is an example of a provider app (Java app) that uses Pact, [Pactflow](https
 
 ### Run the test suite
 
-1. Run unit and integration tests:
+1. Run unit and integration tests
 
         $ ./gradlew test
+
+
+1. Verify provider app
+
+        $ ./gradlew pactVerify
+
+1. Verify provider app and publish results back to Pact Broker
+
+        $ ./gradlew pactVerify -Ppact.verifier.publishResults=true
