@@ -13,8 +13,16 @@ jobs:
         echo ">>> Run unit/integration tests of Provider app"
         ./gradlew test --info
 
-
     - name: "Verify contract"
       script: |
         echo ">>> Verify the provider and publish results back to Pact Broker"
         ./gradlew pactVerify -Ppact.verifier.publishResults=true
+
+    - stage: "Deploy"
+      name: "Deploy to prod"
+      env:
+        - PACT_BROKER_BASE_URL=https://telegacom.pact.dius.com.au
+      script: |
+        printenv
+        make deploy_to_prod
+      if: branch =~ /^(master|fake_deploy).*/
