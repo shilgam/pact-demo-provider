@@ -2,6 +2,10 @@
 
 [![Build Status](https://travis-ci.com/shilgam/pact-demo-provider.svg?branch=master)](https://travis-ci.com/shilgam/pact-demo-provider)
 
+[![Consumer(prod)/provider(prod) Pact Status](https://telegacom.pact.dius.com.au/matrix/provider/pact-demo-provider/latest/prod/consumer/pact-demo-consumer/latest/prod/badge.svg?initials=true)](https://telegacom.pact.dius.com.au/matrix?q[]pacticipant=pact-demo-consumer&q[]tag=prod&q[]latest=true&q[]pacticipant=pact-demo-provider&q[]tag=prod&q[]latest=true&latestby=cvpv&limit=100)
+[![Consumer(prod)/provider(master) Pact Status](https://telegacom.pact.dius.com.au/matrix/provider/pact-demo-provider/latest/master/consumer/pact-demo-consumer/latest/prod/badge.svg?initials=true)](https://telegacom.pact.dius.com.au/matrix?q[]pacticipant=pact-demo-consumer&q[]tag=prod&q[]latest=true&q[]pacticipant=pact-demo-provider&q[]tag=master&q[]latest=true&latestby=cvpv&limit=100)
+[![Can I deploy master to prod Status](https://telegacom.pact.dius.com.au/pacticipants/pact-demo-provider/latest-version/master/can-i-deploy/to/prod/badge)](https://telegacom.pact.dius.com.au/pacticipants/pact-demo-provider/latest-version/master/can-i-deploy/to/prod)
+
 This is an example of a provider app (Java app) that uses Pact, [Pactflow](https://pactflow.io) and Travis CI to ensure that it is compatible with the expectations its consumers have of it.
 
 ## Prerequisites
