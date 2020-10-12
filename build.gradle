@@ -1,5 +1,5 @@
 plugins {
-	id "au.com.dius.pact" version "4.1.2"
+	id "au.com.dius.pact" version "4.1.7"
 	id "com.wiredforcode.spawn" version "0.8.2"
 	id 'org.springframework.boot' version '2.3.3.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
