@@ -25,4 +25,4 @@ jobs:
       script: |
         printenv
         make deploy_to_prod
-      if: branch =~ /^(master|fake_deploy).*/
+      if: branch =~ /^(master_v1|fake_deploy).*/

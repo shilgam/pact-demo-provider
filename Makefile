@@ -1,8 +1,8 @@
 PACTICIPANT := "pact-demo-provider"
 PACT_CLI="docker run --rm -v ${PWD}:${PWD} -e PACT_BROKER_BASE_URL -e PACT_BROKER_TOKEN pactfoundation/pact-cli:0.16.3.0"
 
-# Only deploy from master
-ifeq ($(TRAVIS_BRANCH),master)
+# Only deploy from master_v1
+ifeq ($(TRAVIS_BRANCH),master_v1)
 	DEPLOY_TARGET=deploy
 else
 	DEPLOY_TARGET=no_deploy
@@ -23,7 +23,7 @@ deploy_to_prod: can_i_deploy $(DEPLOY_TARGET)
 deploy: deploy_app tag_as_prod
 
 no_deploy:
-	@echo "Not deploying as not on master branch"
+	@echo "Not deploying as not on master_v1 branch"
 
 can_i_deploy:
 	"${PACT_CLI}" broker can-i-deploy \
