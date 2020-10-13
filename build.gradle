@@ -84,7 +84,7 @@ pact {
 
 			fromPactBroker {
 				selectors = latestTags('master_v1')
-				enablePending = true
+				enablePending = false
 				providerTags = [branchName]
 			}
 
