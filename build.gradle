@@ -83,7 +83,7 @@ pact {
       port = 8080
 
 			fromPactBroker {
-				selectors = latestTags('master')
+				selectors = latestTags('master', 'prod')
 				enablePending = true
 				providerTags = [branchName]
 			}
