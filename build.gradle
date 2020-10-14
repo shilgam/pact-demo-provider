@@ -49,11 +49,11 @@ task stopProvider(type: KillProcessTask) {
 }
 
 def getLastCommitHash() {
-    return ['sh', '-c', 'git rev-parse HEAD'].execute().text
+    return ['sh', '-c', 'git rev-parse HEAD | tr -d "\n"'].execute().text
 }
 
 def getCurrentBranchName() {
-    return ['sh', '-c', 'git rev-parse --abbrev-ref HEAD'].execute().text
+    return ['sh', '-c', 'git rev-parse --abbrev-ref HEAD | tr -d "\n"'].execute().text
 }
 
 def branchName = System.getenv('TRAVIS_BRANCH') ?: getCurrentBranchName()
