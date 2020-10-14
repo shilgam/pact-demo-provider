@@ -16,7 +16,7 @@ jobs:
     - name: "Verify contract"
       script: |
         echo ">>> Verify the provider and publish results back to Pact Broker"
-        ./gradlew pactVerify -Ppact.verifier.publishResults=true
+        make verify_and_publish_ci
 
     - stage: "Deploy"
       name: "Deploy to prod"
