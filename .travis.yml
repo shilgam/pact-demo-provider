@@ -12,11 +12,13 @@ jobs:
       script: |
         echo ">>> Run unit/integration tests of Provider app"
         ./gradlew test --info
+      if: env(PACT_URL) IS NOT present
 
     - name: "Verify contract"
       script: |
         echo ">>> Verify the provider and publish results back to Pact Broker"
         make verify_and_publish_ci
+      if: env(PACT_URL) IS NOT present
 
     - stage: "Deploy"
       name: "Deploy to prod"
@@ -25,4 +27,11 @@ jobs:
       script: |
         printenv
         make deploy_to_prod
-      if: branch =~ /^(master|fake_deploy).*/
+      if: env(PACT_URL) IS NOT present AND branch =~ /^(master).*/
+
+    - stage: "Webhook"
+      name: "Verify contract triggered by webhook"
+      script: |
+        echo ">>> Verify the provider and publish results back to Pact Broker"
+        make verify_and_publish_ci
+      if: env(PACT_URL) IS present
