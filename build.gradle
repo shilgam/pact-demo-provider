@@ -83,7 +83,7 @@ pact {
       port = 8080
 
 			fromPactBroker {
-				selectors = latestTags('master_v1', 'prod')
+				selectors = System.getenv('PACT_URL') ? [] : latestTags('master_v1', 'prod')
 				enablePending = false
 				providerTags = ['master_v1'] // the provider main-line tags
 			}
