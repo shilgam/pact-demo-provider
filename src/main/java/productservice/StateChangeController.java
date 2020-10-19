@@ -23,7 +23,8 @@ public class StateChangeController {
     public Map providerState(@RequestBody Map body) {
 
         if (body.get("state").equals("products exist")) {
-            /** populated by LoadDatabase on app init */
+            repository.saveAndFlush(new Product("CREDIT_CARD", "Visa", "v1"));
+            repository.saveAndFlush(new Product("PERSONAL_LOAN", "MyFlexiPay", "v2"));
         }
         else if (body.get("state").equals("no products exist")) {
             repository.deleteAllInBatch();
