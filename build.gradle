@@ -84,7 +84,7 @@ pact {
 
 			fromPactBroker {
 				selectors = System.getenv('PACT_URL') ? [] : latestTags('master_v1', 'prod')
-				enablePending = false
+				enablePending = true
 				providerTags = ['master_v1'] // the provider main-line tags
 			}
 
