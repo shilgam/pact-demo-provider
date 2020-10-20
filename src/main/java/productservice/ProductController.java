@@ -21,7 +21,7 @@ class ProductController {
 
     // Aggregate root
 
-    @GetMapping("/products")
+    @GetMapping("/entities")
     List<Product> all() {
         return repository.findAll();
     }

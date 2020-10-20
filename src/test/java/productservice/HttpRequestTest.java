@@ -21,7 +21,7 @@ public class HttpRequestTest {
 
     @Test
     public void getProductsList() throws Exception {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/products",
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/entities",
                 String.class)).contains(
                         "[{\"id\":1,\"type\":\"CREDIT_CARD\",\"name\":\"Gem Visa\",\"version\":\"v1\"},{\"id\":2,\"type\":\"CREDIT_CARD\",\"name\":\"28 Degrees\",\"version\":\"v1\"},{\"id\":3,\"type\":\"PERSONAL_LOAN\",\"name\":\"MyFlexiPay\",\"version\":\"v2\"}]"
         );
