@@ -24,7 +24,7 @@ public class StateChangeController {
 
         if (body.get("state").equals("products exist")) {
             repository.saveAndFlush(new Product("CREDIT_CARD", "Visa", "v1"));
-            repository.saveAndFlush(new Product("PERSONAL_LOAN", "MyFlexiPay", "v2"));
+            repository.saveAndFlush(new Product("PERSONAL_LOAN", "MyFlexiPay", "v2 update for br: change_products_path"));
         }
         else if (body.get("state").equals("no products exist")) {
             repository.deleteAllInBatch();
