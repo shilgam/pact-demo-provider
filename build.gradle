@@ -85,13 +85,14 @@ pact {
 			fromPactBroker {
 				selectors = latestTags('master', 'prod')
 				enablePending = true
-				providerTags = [branchName]
+				providerTags = ['master'] // the provider main-line tags
 			}
 
       startProviderTask = startProvider
       terminateProviderTask = stopProvider
       stateChangeUrl = url('http://localhost:8080/pactStateChange')
       providerVersion = { commitHash }
+      providerTag = { branchName } // set provider tag when publish verification results
     }
   }
 }
