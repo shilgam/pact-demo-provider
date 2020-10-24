@@ -26,7 +26,7 @@ ifdef PACT_URL
 	## For builds triggered by a webhook, just verify the changed pact.
 	## The URL will bave been passed in from the webhook to the CI job.
 	$(info PACT_URL is defined)
-	./gradlew pactVerify -Ppact.verifier.publishResults=true -Ppact.filter.pacturl=${PACT_URL}
+	./gradlew pactVerify -Ppact.verifier.publishResults=true -Ppact.provider.tag=master -Ppact.filter.pacturl=${PACT_URL}
 else
 	## For 'normal' provider builds, fetch `master` and `prod` pacts for this provider
 	$(info PACT_URL is not defined)
