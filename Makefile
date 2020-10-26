@@ -16,24 +16,28 @@ endif
 verify:
 	./gradlew pactVerify
 
+verify_and_publish_normal_build_to_local_broker:
+	LOCAL_PACT_BROKER=true make verify_and_publish_normal_build
+
+verify_and_publish_webhook_build_to_local_broker:
+	LOCAL_PACT_BROKER=true make verify_and_publish_webhook_build
+
 
 ## ====================
 ## CI tasks
 ## ====================
 
-verify_and_publish_ci:
-ifdef PACT_URL
-	## For builds triggered by a webhook, just verify the changed pact.
-	## The URL will bave been passed in from the webhook to the CI job.
-	$(info PACT_URL is defined)
-	./gradlew pactVerify -Ppact.verifier.publishResults=true -Ppact.provider.tag=master -Ppact.filter.pacturl=${PACT_URL}
-else
+verify_and_publish_normal_build:
 	## For 'normal' provider builds, fetch `master` and `prod` pacts for this provider
-	$(info PACT_URL is not defined)
 	./gradlew pactVerify -Ppact.verifier.publishResults=true
-endif
+
+verify_and_publish_webhook_build:
+	## For builds triggered by a webhook, just verify the changed pact.
+	## The URL will have been passed in from the webhook to the CI job.
+	./gradlew pactVerify -Ppact.verifier.publishResults=true -Ppact.provider.tag=master -Ppact.filter.pacturl=${PACT_URL}
 
 deploy_to_prod: can_i_deploy $(DEPLOY_TARGET)
+
 
 ## =====================
 ## Deploy tasks

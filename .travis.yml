@@ -16,8 +16,7 @@ jobs:
 
     - name: "Verify contract"
       script: |
-        echo ">>> Verify the provider and publish results back to Pact Broker"
-        make verify_and_publish_ci
+        make verify_and_publish_normal_build
       if: env(PACT_URL) IS NOT present
 
     - stage: "Deploy"
@@ -29,9 +28,8 @@ jobs:
         make deploy_to_prod
       if: env(PACT_URL) IS NOT present AND branch =~ /^(master).*/
 
-    - stage: "Webhook"
+    - stage: "Webhook build"
       name: "Verify contract triggered by webhook"
       script: |
-        echo ">>> Verify the provider and publish results back to Pact Broker"
-        make verify_and_publish_ci
+        make verify_and_publish_webhook_build
       if: env(PACT_URL) IS present
