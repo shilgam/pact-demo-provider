@@ -21,13 +21,15 @@ This is an example of a provider app (Java app) that uses Pact, [Pactflow](https
 
 ## Usage
 
-1. Clone the repo
+1. clone this repo
 
-1. Run the application
+1. cd into project's root dir
 
-        $ ./gradlew bootRun
+1. launch the app
 
-1. Use the application
+        $ make start
+
+1. use the app
 
         $ curl -v localhost:8080/products
 
@@ -42,15 +44,20 @@ This is an example of a provider app (Java app) that uses Pact, [Pactflow](https
 
 ### Run the test suite
 
-1. Run unit and integration tests
+1. run app tests
 
-        $ ./gradlew test
+        $ make test
 
+1. fetch the pacts from the broker and verify pact against provider app
 
-1. Verify provider app
+        $ make verify
 
-        $ ./gradlew pactVerify
+1. verify provider app and publish results back to Pact Broker
 
-1. Verify provider app and publish results back to Pact Broker
+    * to remote Pact Broker
 
-        $ ./gradlew pactVerify -Ppact.verifier.publishResults=true
+          $ make verify_and_publish_normal_build
+
+    * to local Pact Broker
+
+          $ make verify_and_publish_normal_build_to_local_broker

@@ -13,6 +13,12 @@ endif
 ## local development tasks
 ## ====================
 
+start:
+	./gradlew bootRun
+
+test:
+	./gradlew test
+
 verify:
 	./gradlew pactVerify
 
