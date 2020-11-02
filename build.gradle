@@ -36,24 +36,23 @@ test {
 }
 
 springBoot {
-  mainClassName = 'productservice.ProductServiceApplication'
+	mainClassName = 'productservice.ProductServiceApplication'
 }
 
 task startProvider(type: SpawnProcessTask, dependsOn: 'assemble') {
-  command "java -Dspring.profiles.active=test -jar ${jar.archivePath}"
-  ready 'Started ProductServiceApplication'
+	command "java -Dspring.profiles.active=test -jar ${jar.archivePath}"
+	ready 'Started ProductServiceApplication'
 }
 
 task stopProvider(type: KillProcessTask) {
-
 }
 
 def getLastCommitHash() {
-    return ['sh', '-c', 'git rev-parse HEAD | tr -d "\n"'].execute().text
+	return ['sh', '-c', 'git rev-parse HEAD | tr -d "\n"'].execute().text
 }
 
 def getCurrentBranchName() {
-    return ['sh', '-c', 'git rev-parse --abbrev-ref HEAD | tr -d "\n"'].execute().text
+	return ['sh', '-c', 'git rev-parse --abbrev-ref HEAD | tr -d "\n"'].execute().text
 }
 
 def branchName = System.getenv('TRAVIS_BRANCH') ?: getCurrentBranchName()
@@ -78,9 +77,9 @@ pact {
 		}
 	}
 
-  serviceProviders {
-    'pact-demo-provider' {
-      port = 8080
+	serviceProviders {
+		'pact-demo-provider' {
+			port = 8080
 
 			fromPactBroker {
 				selectors = System.getenv('PACT_URL') ? [] : latestTags('master', 'prod', branchName)
@@ -88,11 +87,11 @@ pact {
 				providerTags = ['master'] // the provider main-line tags
 			}
 
-      startProviderTask = startProvider
-      terminateProviderTask = stopProvider
-      stateChangeUrl = url('http://localhost:8080/pactStateChange')
-      providerVersion = { commitHash }
-      providerTag = { branchName } // set provider tag when publish verification results
-    }
-  }
+			startProviderTask = startProvider
+			terminateProviderTask = stopProvider
+			stateChangeUrl = url('http://localhost:8080/pactStateChange')
+			providerVersion = { commitHash }
+			providerTag = { branchName } // set provider tag when publish verification results
+		}
+	}
 }
