@@ -36,6 +36,8 @@ public class StateChangeController {
         }
         else if (body.get("state").equals("product with ID 11 does not exist")) {
         }
+        else if (body.get("state").equals("one more state")) {
+        }
         return Collections.emptyMap();
     }
 }
